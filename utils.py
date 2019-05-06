@@ -36,3 +36,9 @@ def save_paths_to_file(found_path1, found_path2, output_file_path):
         for index1, index2 in zip(found_path1, found_path2):
             writer.writerow([index1, index2])
 
+
+def create_points_list_from_indices_list(indices_list, points_list_from_file):
+    result_points_list = []
+    for index in indices_list:
+        result_points_list.append(points_list_from_file[index])
+    return result_points_list
