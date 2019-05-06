@@ -28,3 +28,11 @@ def draw_starting_point(points_list):
 def draw_starting_point_index(points_list):
     return randint(0, len(points_list) - 1)
 
+
+def save_paths_to_file(found_path1, found_path2, output_file_path):
+    with open(output_file_path, 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['path1', 'path2'])
+        for index1, index2 in zip(found_path1, found_path2):
+            writer.writerow([index1, index2])
+
