@@ -3,6 +3,7 @@ import utils
 
 INPUT_FILE_PATH = '/home/grzegorznow/Pobrane/santa_cities_test.csv'
 OUTPUT_FILE_PATH = '/home/grzegorznow/Pobrane/benchmark_test.csv'
+OUTPUT_FILE_PATH_PERMUTATIONS = '/home/grzegorznow/Pobrane/benchmark_test_permutations.csv'
 
 WINDOW = 10
 
@@ -24,8 +25,13 @@ utils.save_paths_to_file(res1[1], res2[1], OUTPUT_FILE_PATH)
 
 points_list_for_permutations_alg = utils.create_points_list_from_indices_list(res1[1], points_list)
 (perm_res1, perm_tabu_list) = algorithms.permutations_fix_for_first_path(starting_point1, points_list_for_permutations_alg, point_index_dict, WINDOW)
+points_list_for_permutations_alg_second = utils.create_points_list_from_indices_list(res2[1], points_list)
+perm_res2 = algorithms.permutations_fix_for_second_path(starting_point2, points_list_for_permutations_alg_second, point_index_dict, WINDOW, perm_tabu_list)
+
+utils.save_paths_to_file(perm_res1[1], perm_res2[1], OUTPUT_FILE_PATH_PERMUTATIONS)
 
 print(perm_res1)
+print(perm_res2)
 
 print(res1[1] == perm_res1[1])
 
