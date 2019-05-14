@@ -42,3 +42,22 @@ def create_points_list_from_indices_list(indices_list, points_list_from_file):
     for index in indices_list:
         result_points_list.append(points_list_from_file[index])
     return result_points_list
+
+##############################################################################
+
+def find_outer_square_size(points_list):
+    max_x = 0
+    max_y = 0
+    for point in points_list:
+        if point[0] > max_x:
+            max_x = point[0]
+        if point[1] > max_y:
+            max_y = point[1]
+    if max_x >= max_y:
+        return max_x
+    else:
+        return max_y
+
+def list_binning(points_list, outer_square_size, square_dividor):
+    buckets = []
+    for

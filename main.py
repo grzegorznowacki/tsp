@@ -7,6 +7,8 @@ OUTPUT_FILE_PATH_PERMUTATIONS = '/home/grzegorznow/Pobrane/benchmark_test_permut
 
 WINDOW = 10
 
+SQUARE_DIVIDOR = 100
+
 points_list = utils.load_file_to_list(INPUT_FILE_PATH)
 point_index_dict = utils.load_file_to_dict(INPUT_FILE_PATH)
 starting_point1 = utils.draw_starting_point(points_list)
@@ -34,6 +36,11 @@ print(perm_res1[0])
 print(perm_res2[0])
 
 print(res1[1] == perm_res1[1])
+
+#############################################
+
+outer_square_size = utils.find_outer_square_size(points_list)
+
 
 
 #  awk 'NR >= 0 && NR <= 1000' /home/grzegorznow/Pobrane/santa_cities.csv > /home/grzegorznow/Pobrane/santa_cities_test.csv
