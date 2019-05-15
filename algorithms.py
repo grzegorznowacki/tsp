@@ -236,3 +236,4 @@ def permutations_fix_for_second_path(starting_point, points_list, point_index_di
 
 
 # TODO wykorzystac normalna lsite tuplei i odwrocony slownik tupla -> index
+

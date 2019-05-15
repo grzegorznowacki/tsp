@@ -1,6 +1,7 @@
 import csv
 import random
 from random import randint
+from itertools import groupby
 
 def load_file_to_list(input_file_path):
     points_list = []
@@ -58,6 +59,37 @@ def find_outer_square_size(points_list):
     else:
         return max_y
 
-def list_binning(points_list, outer_square_size, square_dividor):
-    buckets = []
-    for
+def divide_range(portion, start=0, end=2**32):
+    threshold_list_start = []
+    threshold_list_end = []
+    for i in range(start, end, portion):
+        threshold_list_start.append(i+1)
+        threshold_list_end.append(i)
+    threshold_list_start[0] = start
+    threshold_list_end = threshold_list_end[1:]
+    threshold_list_end.append(end)
+    ip_range_list = list(zip(threshold_list_start, threshold_list_end))
+    return ip_range_list
+
+def create_buckets(divided_range_list):
+    buckets_list = []
+    for range_x in divided_range_list:
+        for range_y in divided_range_list:
+            buckets_list.append((range_x, range_y))
+    return buckets_list
+
+def list_bucketing(points_list, buckets_list):
+    bucket_points_dict = dict()
+    bucket_points_list = []
+    for point in points_list:
+        for bucket in buckets_list:
+            if bucket[0][0] <= point[0] <= bucket[0][1] and bucket[1][0] <= point[1] <= bucket[1][1]:
+                if bucket not in bucket_points_dict:
+                    bucket_points_dict[bucket] = [point]
+                else:
+                    bucket_points_dict[bucket].append(point)
+    for key in sorted(bucket_points_dict.keys()):
+        bucket_points_list.append((key, bucket_points_dict[key]))
+        print(key)
+    bucket_points_list = [list(grp) for k, grp in groupby(bucket_points_list)]
+    return bucket_points_list
