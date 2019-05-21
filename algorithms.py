@@ -237,3 +237,131 @@ def permutations_fix_for_second_path(starting_point, points_list, point_index_di
 
 # TODO wykorzystac normalna lsite tuplei i odwrocony slownik tupla -> index
 
+
+# def square_fix_for_first_path(starting_points, bucket_points_list):
+#     points_lists = []
+#     for elem in bucket_points_list:
+#         points_lists.append(elem[1])
+#     points_path_list = []
+#     for starting_point, points_list in zip(starting_points, points_lists):
+#         path = []
+#         tabu_list = []
+#
+#         working_points_list = points_list[:]
+#         prev_found_point = starting_point
+#         path.append(starting_point)
+#         working_points_list.remove(starting_point)
+#
+#         sum_len = 0
+#
+#         i = 0   # TODO REMOVE
+#
+#         new_starting_point = starting_point
+#
+#         while len(working_points_list) > 0:
+#             found_point_tuple = find_nearest_neighbour(new_starting_point, working_points_list)
+#             found_point_index = found_point_tuple[1]
+#             found_point = working_points_list[found_point_index]
+#             new_starting_point = found_point
+#             working_points_list.remove(found_point)
+#             path.append(found_point)
+#             tabu_list.append((prev_found_point, found_point))
+#             tabu_list.append((found_point, prev_found_point))
+#             prev_found_point = found_point
+#             sum_len += found_point_tuple[0]
+#
+#             i += 1      # TODO REMOVE
+#             if i % 100 == 0:    # TODO REMOVE
+#                 print(i)    # TODO REMOVE
+#
+#         points_path_list.append(((sum_len, path), tabu_list))
+#
+#     return points_path_list
+
+
+def square_fix_for_first_path(starting_points, bucket_points_list):
+    points_lists = []
+    for elem in bucket_points_list:
+        points_lists.append(elem[1])
+
+    point_index_dicts = []
+    for inner_list in points_lists:
+        point_index_dict = {}
+        for elem in inner_list:
+            point_index_dict[elem] = inner_list.index(elem)
+        point_index_dicts.append(point_index_dict)
+
+    ### starting_points, points_lists, point_index_dicts
+
+    results_list = []
+    for starting_point, points_list, point_index_dict in zip(starting_points, points_lists, point_index_dicts):
+        result = nearest_neighbour_alg_for_first_path(starting_point, points_list, point_index_dict)
+        results_list.append(result)
+
+    return results_list
+
+def square_fix_for_second_path(starting_points, bucket_points_list, tabu_list_all):
+    points_lists = []
+    for elem in bucket_points_list:
+        points_lists.append(elem[1])
+
+    point_index_dicts = []
+    for inner_list in points_lists:
+        point_index_dict = {}
+        for elem in inner_list:
+            point_index_dict[elem] = inner_list.index(elem)
+        point_index_dicts.append(point_index_dict)
+
+    ### starting_points, points_lists, point_index_dicts
+
+    results_list = []
+    for starting_point, points_list, point_index_dict in zip(starting_points, points_lists, point_index_dicts):
+        result = nearest_neighbour_alg_for_second_path(starting_point, points_list, point_index_dict, tabu_list_all)
+        results_list.append(result)
+
+    return results_list
+
+def calculate_square_fix_result_first(bucket_points_list, square_results_list, point_index_dict_all):
+    points_lists = []
+    for elem in bucket_points_list:
+        points_lists.append(elem[1])
+
+    indices_list_all = []
+    tabu_list_all = []
+    for points_list, elem in zip(points_lists, square_results_list):
+        inner_list = elem[0][1]
+        tabu_inner_list = elem[1]
+        for index in inner_list:
+            point = points_list[index]
+            global_index = point_index_dict_all[point]
+            indices_list_all.append(global_index)
+
+        for tabu_elem in tabu_inner_list:
+            tabu_point_tuple = (points_list[tabu_elem[0]], points_list[tabu_elem[1]])
+            global_tabu_index_tuple = (point_index_dict_all[tabu_point_tuple[0]], point_index_dict_all[tabu_point_tuple[1]])
+            tabu_list_all.append(global_tabu_index_tuple)
+
+    return (indices_list_all, tabu_list_all)
+
+def calculate_square_fix_result_second(bucket_points_list, square_results_list, point_index_dict_all):
+    points_lists = []
+    for elem in bucket_points_list:
+        points_lists.append(elem[1])
+
+    indices_list_all = []
+    for points_list, elem in zip(points_lists, square_results_list):
+        inner_list = elem[1]
+        for index in inner_list:
+            point = points_list[index]
+            global_index = point_index_dict_all[point]
+            indices_list_all.append(global_index)
+
+    return indices_list_all
+
+def calculate_path_length_based_on_indices_path_list(indices_list_all, points_list_all):
+    path_len = 0
+    prev_point = points_list_all[indices_list_all[0]]
+    for index in indices_list_all[1:]:
+        path_len += math.hypot(points_list_all[index][0] - prev_point[0], points_list_all[index][1] - prev_point[1])
+        prev_point = points_list_all[index]
+    return path_len

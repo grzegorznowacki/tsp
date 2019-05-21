@@ -2,6 +2,7 @@ import csv
 import random
 from random import randint
 from itertools import groupby
+import algorithms
 
 def load_file_to_list(input_file_path):
     points_list = []
@@ -92,4 +93,18 @@ def list_bucketing(points_list, buckets_list):
         bucket_points_list.append((key, bucket_points_dict[key]))
         print(key)
     bucket_points_list = [list(grp) for k, grp in groupby(bucket_points_list)]
-    return bucket_points_list
+    bucket_points_list_final = []
+    for elem in bucket_points_list:
+        [unpacked_elem] = elem
+        bucket_points_list_final.append(unpacked_elem)
+
+    return bucket_points_list_final
+
+def find_starting_point_for_square(bucket_points_list):
+    starting_points_in_squares_list = []
+    for bucket_pointslist_tuple in bucket_points_list:
+        edge_coords = (bucket_pointslist_tuple[0][0][0], bucket_pointslist_tuple[0][1][0])
+        starting_point_index = algorithms.find_nearest_neighbour(edge_coords, bucket_pointslist_tuple[1])[1]
+        starting_point = bucket_pointslist_tuple[1][starting_point_index]
+        starting_points_in_squares_list.append(starting_point)
+    return starting_points_in_squares_list
