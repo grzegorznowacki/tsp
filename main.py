@@ -1,9 +1,9 @@
 import algorithms
 import utils
 
-INPUT_FILE_PATH = '/home/grzegorznow/Pobrane/santa_cities_test.csv'
-OUTPUT_FILE_PATH = '/home/grzegorznow/Pobrane/benchmark_test.csv'
-OUTPUT_FILE_PATH_PERMUTATIONS = '/home/grzegorznow/Pobrane/benchmark_test_permutations.csv'
+INPUT_FILE_PATH = '/home/gnowacki/Pobrane/santa_cities_test.csv'
+OUTPUT_FILE_PATH = '/home/gnowacki/Pobrane/benchmark_test.csv'
+OUTPUT_FILE_PATH_PERMUTATIONS = '/home/gnowacki/Pobrane/benchmark_test_permutations.csv'
 
 WINDOW = 10
 

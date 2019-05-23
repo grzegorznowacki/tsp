@@ -72,12 +72,34 @@ def divide_range(portion, start=0, end=2**32):
     ip_range_list = list(zip(threshold_list_start, threshold_list_end))
     return ip_range_list
 
+
+def divide_list(my_list, n):
+    return [my_list[i * n:(i + 1) * n] for i in range((len(my_list) + n - 1) // n)]
+
+
 def create_buckets(divided_range_list):
     buckets_list = []
     for range_x in divided_range_list:
         for range_y in divided_range_list:
             buckets_list.append((range_x, range_y))
-    return buckets_list
+    divided_list = divide_list(buckets_list, len(divided_range_list))
+    even_list = divided_list[0::2]
+    # even_list = [j for i in even_list for j in i]
+    print(even_list)
+    odd_list = divided_list[1::2]
+    print(odd_list)
+    for sublist in odd_list:
+        sublist.reverse()
+    # odd_list = [j for i in odd_list for j in i]
+    result = [None] * (len(even_list) + len(odd_list))
+    result[::2] = even_list
+    result[1::2] = odd_list
+    print("result")
+    print(result)
+    final_list = [j for i in result for j in i]
+    print(buckets_list)
+    print("Before return")
+    return final_list
 
 def list_bucketing(points_list, buckets_list):
     bucket_points_dict = dict()
@@ -89,16 +111,43 @@ def list_bucketing(points_list, buckets_list):
                     bucket_points_dict[bucket] = [point]
                 else:
                     bucket_points_dict[bucket].append(point)
-    for key in sorted(bucket_points_dict.keys()):
-        bucket_points_list.append((key, bucket_points_dict[key]))
-        print(key)
+    for bucket in buckets_list:
+        bucket_points_list.append((bucket, bucket_points_dict[bucket]))
+    # for key in sorted(bucket_points_dict.keys()):
+    #     bucket_points_list.append((key, bucket_points_dict[key]))
+    #     print(key)
+    print(buckets_list)
+    print("BUCKET POINTS LIST")
+    print(bucket_points_list)
     bucket_points_list = [list(grp) for k, grp in groupby(bucket_points_list)]
     bucket_points_list_final = []
     for elem in bucket_points_list:
         [unpacked_elem] = elem
         bucket_points_list_final.append(unpacked_elem)
-
+    print(bucket_points_list_final)
     return bucket_points_list_final
+
+# def list_bucketing(points_list, buckets_list):
+#     bucket_points_dict = dict()
+#     bucket_points_list = []
+#     for point in points_list:
+#         for bucket in buckets_list:
+#             if bucket[0][0] <= point[0] <= bucket[0][1] and bucket[1][0] <= point[1] <= bucket[1][1]:
+#                 if bucket not in bucket_points_dict:
+#                     bucket_points_dict[bucket] = [point]
+#                 else:
+#                     bucket_points_dict[bucket].append(point)
+#     for key in sorted(bucket_points_dict.keys()):
+#         bucket_points_list.append((key, bucket_points_dict[key]))
+#         print(key)
+#     bucket_points_list = [list(grp) for k, grp in groupby(bucket_points_list)]
+#     bucket_points_list_final = []
+#     for elem in bucket_points_list:
+#         [unpacked_elem] = elem
+#         bucket_points_list_final.append(unpacked_elem)
+#
+#     return bucket_points_list_final
+
 
 def find_starting_point_for_square(bucket_points_list):
     starting_points_in_squares_list = []
