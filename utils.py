@@ -2,7 +2,8 @@ import csv
 import random
 from random import randint
 from itertools import groupby
-import algorithms
+import algorithms_utils
+
 
 def load_file_to_list(input_file_path):
     points_list = []
@@ -153,7 +154,7 @@ def find_starting_point_for_square(bucket_points_list):
     starting_points_in_squares_list = []
     for bucket_pointslist_tuple in bucket_points_list:
         edge_coords = (bucket_pointslist_tuple[0][0][0], bucket_pointslist_tuple[0][1][0])
-        starting_point_index = algorithms.find_nearest_neighbour(edge_coords, bucket_pointslist_tuple[1])[1]
+        starting_point_index = algorithms_utils.find_nearest_neighbour(edge_coords, bucket_pointslist_tuple[1])[1]
         starting_point = bucket_pointslist_tuple[1][starting_point_index]
         starting_points_in_squares_list.append(starting_point)
     return starting_points_in_squares_list
