@@ -68,6 +68,8 @@ def nearest_neighbour_alg_for_second_path(starting_point, points_list, point_ind
     while len(working_points_list) > 0:
         working_points_list_inner = working_points_list[:]
         while True:
+            if not working_points_list_inner:
+                break
             found_point_tuple = find_nearest_neighbour(new_starting_point, working_points_list_inner)
             found_point_index = found_point_tuple[1]
             found_point = working_points_list_inner[found_point_index]
@@ -300,7 +302,7 @@ def square_fix_for_first_path(starting_points, bucket_points_list):
 
     return results_list
 
-def square_fix_for_second_path(starting_points, bucket_points_list, tabu_list_all):
+def square_fix_for_second_path(starting_points, bucket_points_list, tabu_lists):
     points_lists = []
     for elem in bucket_points_list:
         points_lists.append(elem[1])
@@ -315,8 +317,8 @@ def square_fix_for_second_path(starting_points, bucket_points_list, tabu_list_al
     ### starting_points, points_lists, point_index_dicts
 
     results_list = []
-    for starting_point, points_list, point_index_dict in zip(starting_points, points_lists, point_index_dicts):
-        result = nearest_neighbour_alg_for_second_path(starting_point, points_list, point_index_dict, tabu_list_all)
+    for starting_point, points_list, point_index_dict, tabu_list in zip(starting_points, points_lists, point_index_dicts, tabu_lists):
+        result = nearest_neighbour_alg_for_second_path(starting_point, points_list, point_index_dict, tabu_list)
         results_list.append(result)
 
     return results_list
@@ -335,11 +337,12 @@ def calculate_square_fix_result_first(bucket_points_list, square_results_list, p
             point = points_list[index]
             global_index = point_index_dict_all[point]
             indices_list_all.append(global_index)
+        tabu_list_all.append(tabu_inner_list)
 
-        for tabu_elem in tabu_inner_list:
-            tabu_point_tuple = (points_list[tabu_elem[0]], points_list[tabu_elem[1]])
-            global_tabu_index_tuple = (point_index_dict_all[tabu_point_tuple[0]], point_index_dict_all[tabu_point_tuple[1]])
-            tabu_list_all.append(global_tabu_index_tuple)
+        # for tabu_elem in tabu_inner_list:
+        #     tabu_point_tuple = (points_list[tabu_elem[0]], points_list[tabu_elem[1]])
+        #     global_tabu_index_tuple = (point_index_dict_all[tabu_point_tuple[0]], point_index_dict_all[tabu_point_tuple[1]])
+        #     tabu_list_all.append(global_tabu_index_tuple)
 
     return (indices_list_all, tabu_list_all)
 
