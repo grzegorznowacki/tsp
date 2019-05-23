@@ -43,4 +43,4 @@ outer_square_size = utils.find_outer_square_size(points_list)
 
 
 
-#  awk 'NR >= 0 && NR <= 1000' /home/grzegorznow/Pobrane/santa_cities.csv > /home/grzegorznow/Pobrane/santa_cities_test.csv
+#  awk 'NR >= 0 && NR <= 1000' /home/gnowacki/Pobrane/santa_cities.csv > /home/gnowacki/Pobrane/santa_cities_test.csv
