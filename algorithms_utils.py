@@ -46,8 +46,12 @@ def calculate_square_fix_result_second(bucket_points_list, square_results_list, 
 
 def calculate_path_length_based_on_indices_path_list(indices_list_all, points_list_all):
     path_len = 0
+    edges_len_list = []
     prev_point = points_list_all[indices_list_all[0]]
     for index in indices_list_all[1:]:
-        path_len += math.hypot(points_list_all[index][0] - prev_point[0], points_list_all[index][1] - prev_point[1])
+        edge_len = math.hypot(points_list_all[index][0] - prev_point[0], points_list_all[index][1] - prev_point[1])
+        path_len += edge_len
+        edges_len_list.append(edge_len)
         prev_point = points_list_all[index]
-    return path_len
+    return (path_len, edges_len_list)
+

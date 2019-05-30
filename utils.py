@@ -43,6 +43,13 @@ def save_paths_to_file(found_path1, found_path2, output_file_path):
         for index1, index2 in zip(found_path1, found_path2):
             writer.writerow([index1, index2])
 
+def save_edges_len_to_file(edges_len1, edges_len2, output_file_path):
+    with open(output_file_path, 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['edges_len1', 'edges_len2'])
+        for index1, index2 in zip(edges_len1, edges_len2):
+            writer.writerow([index1, index2])
+
 
 def create_points_list_from_indices_list(indices_list, points_list_from_file):
     result_points_list = []
@@ -139,5 +146,5 @@ def visualize_path(indices_path_list, points_list, grid=False):
         ax.set_xticks(np.arange(0, 20001, SQUARE_DIVIDOR))
         ax.set_yticks(np.arange(0, 20001, SQUARE_DIVIDOR))
         plt.grid()
-    plt.plot(data[:, 0], data[:, 1], linewidth=LINE_WIDTH, color=LINE_COLOR)
+    plt.plot(data[:, 0], data[:, 1], linewidth=LINE_WIDTH)
     plt.show()

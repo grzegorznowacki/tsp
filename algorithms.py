@@ -6,6 +6,7 @@ import algorithms_utils
 def nearest_neighbour_alg_for_first_path(starting_point, points_list, point_index_dict):
     path = []
     tabu_list = []
+    edges_len_list = []
 
     working_points_list = points_list[:]
     prev_real_index = working_points_list.index(starting_point)
@@ -28,12 +29,14 @@ def nearest_neighbour_alg_for_first_path(starting_point, points_list, point_inde
         tabu_list.append((real_index, prev_real_index))
         prev_real_index = real_index
         sum_len += found_point_tuple[0]
+        edges_len_list.append(found_point_tuple[0])
 
-    return ((sum_len, path), tabu_list)
+    return ((sum_len, path), tabu_list, edges_len_list)
 
 
 def nearest_neighbour_alg_for_second_path(starting_point, points_list, point_index_dict, tabu_list):
     path = []
+    edges_len_list = []
 
     working_points_list = points_list[:]
     prev_real_index = working_points_list.index(starting_point)
@@ -63,12 +66,14 @@ def nearest_neighbour_alg_for_second_path(starting_point, points_list, point_ind
         path.append(real_index)
         prev_real_index = real_index
         sum_len += found_point_tuple[0]
+        edges_len_list.append(found_point_tuple[0])
 
-    return (sum_len, path)
+    return ((sum_len, path), edges_len_list)
 
 
 def permutations_fix_for_first_path(starting_point, points_list, point_index_dict, window):
     path = []
+    edges_len_list = []
 
     working_points_list = points_list[:]
     path.append(working_points_list.index(starting_point))
@@ -93,7 +98,9 @@ def permutations_fix_for_first_path(starting_point, points_list, point_index_dic
 
     total_length = 0
     for i, j in enumerate(new_list[:-1]):
-        total_length += math.hypot(new_list[i + 1][0] - j[0], new_list[i + 1][1] - j[1])
+        edge_len = math.hypot(new_list[i + 1][0] - j[0], new_list[i + 1][1] - j[1])
+        total_length += edge_len
+        edges_len_list.append(edge_len)
 
     new_list_indices = [point_index_dict[point] for point in new_list]
 
@@ -102,11 +109,12 @@ def permutations_fix_for_first_path(starting_point, points_list, point_index_dic
         tabu_list.append((j, new_list_indices[i + 1]))
         tabu_list.append((new_list_indices[i+1], j))
 
-    return ((total_length, new_list_indices), tabu_list)
+    return ((total_length, new_list_indices), tabu_list, edges_len_list)
 
 
 def permutations_fix_for_second_path(starting_point, points_list, point_index_dict, window, tabu_list):
     path = []
+    edges_len_list = []
 
     working_points_list = points_list[:]
     path.append(working_points_list.index(starting_point))
@@ -133,11 +141,13 @@ def permutations_fix_for_second_path(starting_point, points_list, point_index_di
 
     total_length = 0
     for i, j in enumerate(new_list[:-1]):
-        total_length += math.hypot(new_list[i + 1][0] - j[0], new_list[i + 1][1] - j[1])
+        edge_len = math.hypot(new_list[i + 1][0] - j[0], new_list[i + 1][1] - j[1])
+        total_length += edge_len
+        edges_len_list.append(edge_len)
 
     new_list_indices = [point_index_dict[point] for point in new_list]
 
-    return (total_length, new_list_indices)
+    return ((total_length, new_list_indices), edges_len_list)
 
 
 def square_fix_for_first_path(starting_points, bucket_points_list):
