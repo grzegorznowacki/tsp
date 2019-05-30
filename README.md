@@ -1,5 +1,6 @@
 # tsp
 ## Travelling  Santa Problem Solvers
+![alt text](visualizations/demo.png)
 ### Input
 CSV file containing points coordinates:
 ```csv
