@@ -42,3 +42,9 @@ awk 'NR >= 0 && NR <= 1000' input/santa_cities.csv > input/santa_cities_trimmed.
 - Squares
     - OUTPUT_FILE_PATH_SQUARES
     - SQUARE_DIVIDOR
+### How to launch app:
+```bash
+python3 main_nearest_neighbour.py
+python3 main_permutations.py
+python3 main_squares.py
+```
