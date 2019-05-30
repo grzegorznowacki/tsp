@@ -48,3 +48,5 @@ python3 main_nearest_neighbour.py
 python3 main_permutations.py
 python3 main_squares.py
 ```
+### Documentation
+See docs directory.
