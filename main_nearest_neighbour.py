@@ -18,5 +18,9 @@ print("Nearest neighbour first path length: ", res1[0])
 print("Nearest neighbour second path length: ", res2[0])
 print("Time: ", end_time - start_time)
 
+points_list = utils.load_file_to_list(INPUT_FILE_PATH)
+utils.visualize_path(res1[1], points_list)
+utils.visualize_path(res2[1], points_list)
+
 
 

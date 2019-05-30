@@ -10,4 +10,4 @@ WINDOW = 10
 
 ### SQUARES ###
 OUTPUT_FILE_PATH_SQUARES = 'output/benchmark_squares.csv'
-SQUARE_DIVIDOR = 10000
+SQUARE_DIVIDOR = 6665

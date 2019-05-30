@@ -21,3 +21,7 @@ utils.save_paths_to_file(perm_res1[1], perm_res2[1], OUTPUT_FILE_PATH_PERMUTATIO
 print("Permutations first path length: ", perm_res1[0])
 print("Permutations second path length: ", perm_res2[0])
 print("Time: ", end_time - start_time)
+
+points_list = utils.load_file_to_list(INPUT_FILE_PATH)
+utils.visualize_path(perm_res1[1], points_list)
+utils.visualize_path(perm_res2[1], points_list)

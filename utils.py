@@ -3,6 +3,9 @@ import random
 from random import randint
 from itertools import groupby
 import algorithms_utils
+import numpy as np
+import matplotlib.pyplot as plt
+from config import *
 
 
 def load_file_to_list(input_file_path):
@@ -124,3 +127,21 @@ def find_starting_point_for_square(bucket_points_list):
         starting_point = bucket_pointslist_tuple[1][starting_point_index]
         starting_points_in_squares_list.append(starting_point)
     return starting_points_in_squares_list
+
+def visualize_path(indices_path_list, points_list, grid=False):
+    list_for_numpy = []
+    for index in indices_path_list:
+        list_for_numpy.append([points_list[index][0], points_list[index][1]])
+    data = np.array(list_for_numpy)
+    if grid == False:
+        plt.plot(data[:, 0], data[:, 1])
+        plt.show()
+    elif grid == True:
+        fig = plt.figure()
+        ax = fig.gca()
+        ax.set_xticks(np.arange(0, 20001, SQUARE_DIVIDOR))
+        ax.set_yticks(np.arange(0, 20001, SQUARE_DIVIDOR))
+        plt.plot(data[:, 0], data[:, 1])
+        plt.grid()
+        plt.show()
+

@@ -28,6 +28,10 @@ print("Squares first path length: ", path_len)
 print("Squares second path length: ", path_len_second)
 print("Time: ", end_time - start_time)
 
+points_list = utils.load_file_to_list(INPUT_FILE_PATH)
+utils.visualize_path(indices_list_all, points_list, grid=True)
+utils.visualize_path(indices_list_all_second, points_list, grid=True)
+
 
 
 
