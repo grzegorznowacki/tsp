@@ -2,11 +2,7 @@ import algorithms
 import utils
 import algorithms_utils
 import time
-
-
-INPUT_FILE_PATH = '/home/gnowacki/Pobrane/santa_cities_test.csv'
-OUTPUT_FILE_PATH_SQUARES = '/home/gnowacki/Pobrane/benchmark_test_squares.csv'
-SQUARE_DIVIDOR = 10000
+from config import *
 
 
 points_list = utils.load_file_to_list(INPUT_FILE_PATH)
@@ -21,7 +17,7 @@ point_index_dict_all = utils.load_file_to_dict(INPUT_FILE_PATH)
 indices_list_all, tabu_list_all = algorithms_utils.calculate_square_fix_result_first(bucket_points_list, square_results_list, point_index_dict_all)
 points_list_all = utils.load_file_to_list(INPUT_FILE_PATH)
 path_len = algorithms_utils.calculate_path_length_based_on_indices_path_list(indices_list_all, points_list_all)
-### second path
+### second path ###
 square_results_list_second = algorithms.square_fix_for_second_path(starting_points_in_squares_list, bucket_points_list, tabu_list_all)
 indices_list_all_second = algorithms_utils.calculate_square_fix_result_second(bucket_points_list, square_results_list_second, point_index_dict_all)
 path_len_second = algorithms_utils.calculate_path_length_based_on_indices_path_list(indices_list_all_second, points_list_all)

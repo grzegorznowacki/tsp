@@ -1,10 +1,7 @@
 import algorithms
 import utils
 import time
-
-
-INPUT_FILE_PATH = '/home/gnowacki/Pobrane/santa_cities_test.csv'
-OUTPUT_FILE_PATH = '/home/gnowacki/Pobrane/benchmark_test.csv'
+from config import *
 
 
 points_list = utils.load_file_to_list(INPUT_FILE_PATH)
