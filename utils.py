@@ -133,15 +133,11 @@ def visualize_path(indices_path_list, points_list, grid=False):
     for index in indices_path_list:
         list_for_numpy.append([points_list[index][0], points_list[index][1]])
     data = np.array(list_for_numpy)
-    if grid == False:
-        plt.plot(data[:, 0], data[:, 1])
-        plt.show()
-    elif grid == True:
+    if grid == True:
         fig = plt.figure()
         ax = fig.gca()
         ax.set_xticks(np.arange(0, 20001, SQUARE_DIVIDOR))
         ax.set_yticks(np.arange(0, 20001, SQUARE_DIVIDOR))
-        plt.plot(data[:, 0], data[:, 1])
         plt.grid()
-        plt.show()
-
+    plt.plot(data[:, 0], data[:, 1], linewidth=LINE_WIDTH, color=LINE_COLOR)
+    plt.show()

@@ -11,3 +11,7 @@ WINDOW = 10
 ### SQUARES ###
 OUTPUT_FILE_PATH_SQUARES = 'output/benchmark_squares.csv'
 SQUARE_DIVIDOR = 6665
+
+### VISUALIZATION ###
+LINE_WIDTH = 0.1
+LINE_COLOR = 'red'
